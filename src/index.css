@@ -1,0 +1,130 @@
+body {
+	margin: 0;
+	background-color: white;
+}
+
+ul {
+	list-style-type: none;
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+.mdl-list {
+	display: block;
+	padding: 8px 0;
+	list-style: none;
+}
+
+.mdl-list__item,
+.mdl-list__item .mdl-list__item-primary-content {
+	box-sizing: border-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+
+.mdl-list__item {
+	font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	letter-spacing: .04em;
+	line-height: 1;
+	min-height: 48px;
+	-webkit-flex-direction: row;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-webkit-flex-wrap: nowrap;
+	-ms-flex-wrap: nowrap;
+	flex-wrap: nowrap;
+	padding: 16px;
+	cursor: default;
+	color: rgba(0, 0, 0, .87);
+	overflow: hidden;
+}
+
+.mdl-list__item .mdl-list__item-primary-content {
+	-webkit-order: 0;
+	-ms-flex-order: 0;
+	order: 0;
+	-webkit-flex-grow: 2;
+	-ms-flex-positive: 2;
+	flex-grow: 2;
+	text-decoration: none;
+}
+
+.mdl-textfield__input {
+	border: none;
+	border-bottom: 1px solid rgba(0, 0, 0, .12);
+	display: block;
+	font-size: 16px;
+	font-family: "Helvetica", "Arial", sans-serif;
+	margin: 0;
+	padding: 4px 0;
+	width: 100%;
+	background: 0 0;
+	text-align: left;
+	color: inherit;
+}
+
+.pause svg {
+	fill: red;
+}
+
+.start svg {
+	fill: green;
+}
+
+.mdl-textfield__input:focus {
+	outline: none;
+}
+
+.material-icons {
+	height: 40px;
+	width: 40px;
+	box-sizing: border-box;
+	border-radius: 50%;
+	margin-right: 16px;
+}
+
+.mdl-list__item .pause {
+	display: none;
+}
+
+.mdl-list__item.activated .pause {
+	display: inline-block;
+}
+
+.mdl-list__item.activated .start {
+	display: none;
+}
+
+.mdl-list__item.activated .mdl-list__item-secondary-content {
+	display: none;
+}
+
+.hosting .add,
+.adding .add {
+	display: none;
+}
+
+.disabled {
+	pointer-events: none;
+	cursor: default;
+	opacity: 0.45;
+}
+
+#app {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+.hostslist{
+	flex:1;
+
+}
