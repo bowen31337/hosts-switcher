@@ -16,6 +16,7 @@ export default [{
 		output: [
 			{ file: './main.js', format: 'cjs' }
 		],
+		plugins:[production && uglify()],
 		external: ['electron', 'electron-reloader', 'path', 'url', 'fs-extra', 'os', 'child_process']
 	},
 	{
@@ -26,7 +27,7 @@ export default [{
 		plugins: [postcss({
 			extract: true
 			// plugins: []
-		}), resolve(), commonjs(), babel(),copy({src:'./src/index.html',dest:'./index.html'})],
+		}), resolve(), commonjs(), babel(),copy({src:'./src/index.html',dest:'./index.html'}),production && uglify()],
 		watch: {
 			chokidar: true,
 		},

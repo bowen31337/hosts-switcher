@@ -3,7 +3,8 @@
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var path = _interopDefault(require('path'));
-var electron = _interopDefault(require('electron'));
+var electron = require('electron');
+var electron__default = _interopDefault(electron);
 var fs = _interopDefault(require('fs-extra'));
 var os = _interopDefault(require('os'));
 require('child_process');
@@ -17,7 +18,7 @@ const globalObj = { mainWindow: undefined, tray: undefined };
 
 const assetsPath = path.join(__dirname, 'images');
 
-const { app } = electron;
+const { app } = electron__default;
 
 const userDataPath = path.join(app.getPath('userData'), 'data');
 console.log(userDataPath);
@@ -128,7 +129,7 @@ const getHostPathByName = file => path.join(hostfilesPath, file);
 
 const trimFileString = string => string.replace(/\s*$/, '');
 
-const { BrowserWindow } = electron;
+const { BrowserWindow } = electron__default;
 
 const createWindow = (cb = () => {}) => {
 	// Create the browser window.
@@ -210,7 +211,7 @@ const toggleWindow = (mainWindow, tray) => {
 	}
 };
 
-const { Tray } = electron;
+const { Tray } = electron__default;
 
 const createTray = (mainWindow, cb = () => {}) => {
 	let trayIconPath = path.join(assetsPath, 'png', '16x16.png');
@@ -252,7 +253,7 @@ const permissionNotice = () => {
 		New user or group will be added to the list. Now you need to select the newly added group or user and check the Full control option below.\r\n
 		Click Apply and OK to save changes.`
 			: `sudo chown ${process.env.USER} ${OriHostsPath$1}`;
-	dialog.showErrorBox(
+	electron.dialog.showErrorBox(
 		`Hi, ${
 			process.env.USER
 		}\n\rPlease gain write permission to your hosts file "${OriHostsPath$1}". Please follow the instructions bellow`,
@@ -274,7 +275,7 @@ const setLastHostName = hostName => write(lastStateConfFile, hostName);
 isDev && reloader(module, { debug: true,ignore:['./src','./images','./out','yarn-error.log',
      'yarn.lock','package.json','*.md']});
 
-const { app: app$1, ipcMain: ipc, dialog: dialog$1 } = electron;
+const { app: app$1, ipcMain: ipc, dialog } = electron__default;
 
 const createApp = () => {
 	deactivateHost();
@@ -297,12 +298,12 @@ const renderHostsUI = event =>
 	});
 
 process.on('uncaughtException', function(err) {
-	dialog$1.showErrorBox('Uncaught Exception: ' + err.message, err.stack || '');
+	dialog.showErrorBox('Uncaught Exception: ' + err.message, err.stack || '');
 	deactivateHost();
 	app$1.quit();
 });
 
-app$1.dock.hide();
+// app.dock.hide()
 app$1.on('ready', createApp);
 // Quit when all windows are closed.
 app$1.on('window-all-closed', function() {
@@ -355,7 +356,7 @@ ipc.on('saveFile', (evt, file) => {
 });
 
 ipc.on('deleteFile', (evt, file) => {
-	const code = dialog$1.showMessageBox({
+	const code = dialog.showMessageBox({
 		message: `Are you sure to delete this hosts : ${file}?`,
 		buttons: ['Yes', 'No'],
 	});

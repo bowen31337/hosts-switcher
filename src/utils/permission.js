@@ -2,6 +2,7 @@ import fs from 'fs-extra'
 import path from 'path'
 import { hostfilesPath } from './configPath'
 import { getDefaultHostFile } from './hostFiles'
+import { dialog } from 'electron'
 import os from 'os'
 
 import { execSync } from 'child_process'

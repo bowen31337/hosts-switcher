@@ -50,7 +50,7 @@ process.on('uncaughtException', function(err) {
 	app.quit()
 })
 
-app.dock.hide()
+// app.dock.hide()
 app.on('ready', createApp)
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
