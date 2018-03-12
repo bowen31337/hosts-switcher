@@ -1,1 +1,1 @@
-./out/*.zip filter=lfs diff=lfs merge=lfs -text
+out/*.zip filter=lfs diff=lfs merge=lfs -text
