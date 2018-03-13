@@ -16,7 +16,6 @@ export default [{
 		output: [
 			{ file: './main.js', format: 'cjs' }
 		],
-		plugins:[production && uglify()],
 		external: ['electron', 'electron-reloader', 'path', 'url', 'fs-extra', 'os', 'child_process']
 	},
 	{
