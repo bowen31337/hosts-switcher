@@ -1,11 +1,9 @@
 import { screen } from 'electron'
 
-const screenSize = screen.getDisplayNearestPoint(screen.getCursorScreenPoint())
-	.workArea
-
 const getWindowPosition = (mainWindow, tray) => {
+	const screenSize = screen.getPrimaryDisplay().workAreaSize
 	const windowBounds = mainWindow.getBounds()
-	const windowSize = mainWindow.getSize()
+
 	const trayBounds = tray.getBounds()
 
 	// Center window horizontally below the tray icon
@@ -17,7 +15,7 @@ const getWindowPosition = (mainWindow, tray) => {
 	let y = Math.round(trayBounds.y + trayBounds.height + 4)
 
 	if (process.platform === 'win32') {
-		y = Math.round(screenSize.height - (windowSize[1] - screenSize.y))
+		y = Math.round(screenSize.height - (windowBounds.height - 4))
 	}
 
 	return { x: x, y: y }
