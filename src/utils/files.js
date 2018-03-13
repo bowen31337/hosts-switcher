@@ -5,7 +5,6 @@ import { getDefaultHostFile } from './hostFiles'
 import os from 'os'
 import globals from './globals'
 
-
 import { execSync } from 'child_process'
 
 const OriHostsPath = getDefaultHostFile()[0].path
@@ -21,7 +20,7 @@ const MODE_0755 = parseInt('0755', 8)
 const MODE_0666 = parseInt('0666', 8)
 
 const activateHost = file => {
-	if(globals.tray) globals.tray.setTitle(file)
+	if (globals.tray) globals.tray.setTitle(file)
 
 	const backup = backupOrigHosts()
 	if (backup) {
@@ -36,7 +35,7 @@ const activateHost = file => {
 }
 
 const deactivateHost = () => {
-	if(globals.tray) globals.tray.setTitle('default')
+	if (globals.tray) globals.tray.setTitle('default')
 	const restore = restoreOrigHosts()
 	if (restore) {
 		return restore.then(() => fs.remove(bakHostPath)).catch(err => {

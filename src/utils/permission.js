@@ -11,7 +11,9 @@ const OriHostsPath = getDefaultHostFile()[0].path
 
 const stat = fs.statSync(OriHostsPath)
 
-const { uid, gid } = os.userInfo()
+console.log(os.userInfo())
+console.log('stat', stat)
+const { uid, gid, username } = os.userInfo()
 
 const givePermissionToHosts = pw => {
 	// try{
@@ -25,7 +27,7 @@ const givePermissionToHosts = pw => {
 	//  if(err) throw err;
 	// })
 	try {
-		execSync(`echo ${pw} | sudo -S chown ${process.env.USER} ${OriHostsPath}`)
+		execSync(`echo ${pw} | sudo -S chown ${username} ${OriHostsPath}`)
 	} catch (e) {
 		throw e
 	}
@@ -41,11 +43,9 @@ const permissionNotice = () => {
 		Enter the user name or the group name in the Enter the object names to select field and click Check Names and OK\r\n
 		New user or group will be added to the list. Now you need to select the newly added group or user and check the Full control option below.\r\n
 		Click Apply and OK to save changes.`
-			: `sudo chown ${process.env.USER} ${OriHostsPath}`
+			: `sudo chown ${username} ${OriHostsPath}`
 	dialog.showErrorBox(
-		`Hi, ${
-			process.env.USER
-		}\n\rPlease gain write permission to your hosts file "${OriHostsPath}". Please follow the instructions bellow`,
+		`Hi, ${username}\n\rPlease gain write permission to your hosts file "${OriHostsPath}". Please follow the instructions bellow`,
 		`${solution}`
 	)
 }

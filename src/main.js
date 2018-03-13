@@ -19,8 +19,19 @@ import { getLastHostName, setLastHostName } from './utils/restoreState'
 
 import { getHostFiles } from './utils/hostFiles'
 
-isDev && reloader(module, { debug: true,ignore:['./src','./images','./out','yarn-error.log',
-     'yarn.lock','package.json','*.md']})
+isDev &&
+	reloader(module, {
+		debug: true,
+		ignore: [
+			'./src',
+			'./images',
+			'./out',
+			'yarn-error.log',
+			'yarn.lock',
+			'package.json',
+			'*.md',
+		],
+	})
 
 const { app, ipcMain: ipc, dialog } = electron
 
@@ -50,7 +61,7 @@ process.on('uncaughtException', function(err) {
 	app.quit()
 })
 
-// app.dock.hide()
+app.dock.hide()
 app.on('ready', createApp)
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
