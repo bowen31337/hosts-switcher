@@ -10,9 +10,6 @@ import { execSync } from 'child_process'
 const OriHostsPath = getDefaultHostFile()[0].path
 
 const stat = fs.statSync(OriHostsPath)
-
-console.log(os.userInfo())
-console.log('stat', stat)
 const { uid, gid, username } = os.userInfo()
 
 const givePermissionToHosts = pw => {
@@ -50,6 +47,14 @@ const permissionNotice = () => {
 	)
 }
 
-const hasPermssionOnHosts = () => stat.uid === uid || stat.gid === gid
+// const hasPermssionOnHosts = () => stat.uid === uid || stat.gid === gid
+const hasPermssionOnHosts = () => {
+	try {
+		fs.accessSync(OriHostsPath, fs.constants.W_OK)
+		return true
+	} catch (err) {
+		return false
+	}
+}
 
 export { hasPermssionOnHosts, givePermissionToHosts, permissionNotice }

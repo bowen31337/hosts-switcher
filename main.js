@@ -241,9 +241,6 @@ const createTray = (mainWindow, cb = () => {}) => {
 const OriHostsPath$1 = getDefaultHostFile()[0].path
 
 const stat$1 = fs.statSync(OriHostsPath$1)
-
-console.log(os.userInfo())
-console.log('stat', stat$1)
 const { uid, gid, username } = os.userInfo()
 
 const permissionNotice = () => {
@@ -263,7 +260,15 @@ const permissionNotice = () => {
 	)
 }
 
-const hasPermssionOnHosts = () => stat$1.uid === uid || stat$1.gid === gid
+// const hasPermssionOnHosts = () => stat.uid === uid || stat.gid === gid
+const hasPermssionOnHosts = () => {
+	try {
+		fs.accessSync(OriHostsPath$1, fs.constants.W_OK)
+		return true
+	} catch (err) {
+		return false
+	}
+}
 
 const lastStateConfFile = path.join(userDataPath, 'lastState.conf')
 
@@ -316,7 +321,7 @@ process.on('uncaughtException', function(err) {
 	app$1.quit()
 })
 
-app$1.dock.hide()
+// app.dock.hide()
 app$1.on('ready', createApp)
 // Quit when all windows are closed.
 app$1.on('window-all-closed', function() {
